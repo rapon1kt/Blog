@@ -29,3 +29,12 @@ const postUpload = multer({ storage: postFileStorage }).array("upload", 2);
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
+
+// MONGOOSE CONFIGURATION
+const PORT = process.env.PORT || 3001;
+mongoose
+	.connect(process.env.MONGOOSE_URL!)
+	.then(() => {
+		app.listen(PORT, () => console.log(`Server is online on port: ${PORT}`));
+	})
+	.catch((error) => console.log(`${error} did not connect`));
