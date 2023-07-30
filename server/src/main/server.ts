@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import { userFileStorage, postFileStorage } from "../config/multer";
 import multer from "multer";
+import { authRoutes, postsRoutes, usersRoutes } from "../routes";
 
 // CONFIGURATIONS
 
@@ -18,3 +19,13 @@ app.use(cors());
 
 const userUpload = multer({ storage: userFileStorage }).single("upload");
 const postUpload = multer({ storage: postFileStorage }).array("upload", 2);
+
+// ROUTES WITH FILES
+
+/* this part i will implement later when the route paths are already defined  */
+
+// ROUTES
+
+app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
+app.use("/posts", postsRoutes);
