@@ -1,9 +1,9 @@
 require("dotenv").config();
 import express from "express";
 import bodyParser from "body-parser";
-import multer from "multer";
 import mongoose from "mongoose";
 import cors from "cors";
+import { userFileStorage, postFileStorage } from "../config/multer";
 
 // CONFIGURATIONS
 
