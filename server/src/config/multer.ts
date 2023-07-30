@@ -1,9 +1,22 @@
 import multer from "multer";
 import crypto from "crypto";
+import path from "path";
 
 export const userFileStorage = multer.diskStorage({
 	destination(req, file, callback) {
-		callback(null, "client/public/assets/users");
+		callback(
+			null,
+			path.resolve(
+				__dirname,
+				"..",
+				"..",
+				"..",
+				"client",
+				"public",
+				"assets",
+				"users"
+			)
+		);
 	},
 	filename(req, file, callback) {
 		crypto.randomBytes(16, (err, hash) => {
@@ -16,7 +29,19 @@ export const userFileStorage = multer.diskStorage({
 
 export const postFileStorage = multer.diskStorage({
 	destination(req, file, callback) {
-		callback(null, "client/public/assets/posts");
+		callback(
+			null,
+			path.resolve(
+				__dirname,
+				"..",
+				"..",
+				"..",
+				"client",
+				"public",
+				"assets",
+				"posts"
+			)
+		);
 	},
 	filename(req, file, callback) {
 		crypto.randomBytes(16, (err, hash) => {
