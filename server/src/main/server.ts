@@ -3,9 +3,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
-import { userFileStorage, postFileStorage } from "../config/multer";
 import multer from "multer";
-import { authRoutes, postsRoutes, usersRoutes } from "../routes";
+import { userFileStorage, postFileStorage } from "../config/multer";
+import { authRoutes, postsRoutes, usersRoutes } from "./routes";
 
 // CONFIGURATIONS
 
