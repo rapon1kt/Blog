@@ -21,7 +21,7 @@ export const userSchema = new mongoose.Schema(
 		},
 		avatar_url: {
 			type: String,
-			required: false,
+			optional: true,
 			default: "",
 		},
 		birthday: {
@@ -30,15 +30,15 @@ export const userSchema = new mongoose.Schema(
 		},
 		registration: {
 			type: Number,
-			required: false,
+			optional: true,
 		},
 		grade: {
 			type: String,
-			required: false,
+			optional: true,
 		},
 		role: {
 			type: String,
-			required: false,
+			optional: true,
 		},
 	},
 	{ timestamps: true }
