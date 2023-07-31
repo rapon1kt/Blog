@@ -20,11 +20,17 @@ app.use(cors());
 // FILE STORAGE CONFIGURATION
 
 const userUpload = multer({ storage: userFileStorage }).single("upload");
-const postUpload = multer({ storage: postFileStorage }).array("upload", 2);
+const postUpload = multer({ storage: postFileStorage }).fields([
+	{
+		name: "pictures",
+		maxCount: 5,
+	},
+	{ name: "archive", maxCount: 1 },
+]);
 
 // ROUTES WITH FILES
 
-app.post("/posts", verifyToken, postUpload, createPost);
+app.post("/posts/:userId", verifyToken, postUpload, createPost);
 app.put("/users/:id", verifyToken, userUpload, updateUser);
 
 // ROUTES
