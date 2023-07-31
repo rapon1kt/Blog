@@ -20,8 +20,6 @@ export default async function login(req: Request, res: Response) {
 		// if everything is correct we create a login token for this user
 		const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
 
-		// we delete the password that will now no longer be used and send the token and user to the client
-		delete user.password;
 		res.status(200).json({ token, user });
 	} catch (error: any) {
 		// if there is any error not related to the previous conditions, it will be sent to the client
