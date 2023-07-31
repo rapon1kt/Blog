@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { Post } from "../../models";
 
-export default async function getFeedPosts(res: Response, req: Request) {
+export default async function getFeedPosts(req: Request, res: Response) {
 	try {
 		// fetch posts in database and send to client
 		const posts = await Post.find();

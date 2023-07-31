@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { Post } from "../../models";
 
-export default async function getUserPosts(res: Response, req: Request) {
+export default async function getUserPosts(req: Request, res: Response) {
 	try {
 		// get userId from request params
 		const { userId } = req.params;

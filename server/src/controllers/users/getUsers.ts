@@ -1,7 +1,7 @@
 import { Response, Request } from "express";
 import { User } from "../../models";
 
-export default async function getUsers(res: Response, req: Request) {
+export default async function getUsers(req: Request, res: Response) {
 	try {
 		// get users from database
 		const users = await User.find();
