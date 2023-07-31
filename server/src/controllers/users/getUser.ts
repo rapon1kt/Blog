@@ -9,7 +9,7 @@ export default async function getUser(req: Request, res: Response) {
 		const user = await User.findById(id);
 		res.status(200).json(user);
 	} catch (error: any) {
-		// if have an error send this error.message to client
-		res.status(500).json(error.message);
+		// if have an error send a message as error.message to client
+		res.status(404).json({ message: error.message });
 	}
 }
