@@ -24,8 +24,8 @@ const postUpload = multer({ storage: postFileStorage }).array("upload", 2);
 
 // ROUTES WITH FILES
 
-app.post("/posts", verifyToken, createPost);
-app.patch("/users", verifyToken, updateUser);
+app.post("/posts", verifyToken, postUpload, createPost);
+app.put("/users/:id", verifyToken, userUpload, updateUser);
 
 // ROUTES
 
