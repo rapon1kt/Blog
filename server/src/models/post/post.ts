@@ -17,10 +17,10 @@ const postSchema = new mongoose.Schema(
 			optional: true,
 			default: [],
 		},
-		picturePath: {
-			type: String,
+		picturesPaths: {
+			type: Array,
 			optional: true,
-			default: "",
+			default: [],
 		},
 		archivePath: {
 			type: String,
