@@ -6,6 +6,8 @@ import cors from "cors";
 import multer from "multer";
 import { userFileStorage, postFileStorage } from "../config/multer";
 import { authRoutes, postsRoutes, usersRoutes } from "./routes";
+import { createPost, updateUser } from "../controllers";
+import { verifyToken } from "../middleware";
 
 // CONFIGURATIONS
 
@@ -22,7 +24,8 @@ const postUpload = multer({ storage: postFileStorage }).array("upload", 2);
 
 // ROUTES WITH FILES
 
-/* this part i will implement later when the route paths are already defined  */
+app.post("/posts", verifyToken, createPost);
+app.patch("/users", verifyToken, updateUser);
 
 // ROUTES
 
