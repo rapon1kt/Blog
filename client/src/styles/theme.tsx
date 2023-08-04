@@ -22,7 +22,7 @@ const mainTheme = (mode: PaletteMode) => ({
 	},
 });
 
-export default function ToggleColorMode({ children }: any) {
+export default function ThemeContextProvider({ children }: any) {
 	const [mode, setMode] = React.useState<"light" | "dark">("light");
 	const colorMode = React.useMemo(
 		() => ({
