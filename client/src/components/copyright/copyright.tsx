@@ -1,12 +1,15 @@
-import { Typography, Link } from "@mui/material";
+import { Typography, Link, SxProps } from "@mui/material";
 
-export default function Copyright(props: any) {
+export default function Copyright({ props }: { props?: SxProps }) {
 	return (
 		<Typography
 			variant="body2"
 			color="text.secondary"
+			display="flex"
+			alignItems="center"
+			justifyContent="center"
 			align="center"
-			{...props}
+			sx={props}
 		>
 			{"Copyright © "}
 			<Link color="inherit" href="https://colegioempreender.com.br">
