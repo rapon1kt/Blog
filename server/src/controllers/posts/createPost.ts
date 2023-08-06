@@ -7,8 +7,6 @@ export default async function createPost(req: Request, res: Response) {
 		const { userId } = req.params;
 		const { title, description } = req.body;
 		const uploads: any = req.files;
-		// find the owner of the post
-		const owner = await User.findById(userId);
 		// filter the files of req.files
 		const pictures = await uploads?.pictures.map(
 			(picture: any) => picture.filename
@@ -20,7 +18,7 @@ export default async function createPost(req: Request, res: Response) {
 			description,
 			picturesPaths: pictures,
 			archivePath: archive,
-			owner,
+			owner: userId,
 		});
 		const createdPost = await post.save();
 		// send this post to client
