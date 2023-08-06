@@ -6,7 +6,7 @@ export default interface Post {
 	description: string;
 	createdAt: Date;
 	comments?: Array<string>;
-	picturePath?: string;
+	picturesPaths?: Array<string>;
 	archivePath?: string;
-	owner: User;
+	owner: String;
 }
