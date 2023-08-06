@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { userSchema } from "../user/user";
 
 const postSchema = new mongoose.Schema(
 	{
@@ -27,7 +26,11 @@ const postSchema = new mongoose.Schema(
 			optional: true,
 			default: "",
 		},
-		owner: userSchema,
+		owner: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
 	},
 	{ timestamps: true }
 );
