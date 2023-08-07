@@ -123,6 +123,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 			>
 				{navLinks.map((item) => (
 					<Box
+						key={item.id}
 						sx={{
 							width: "100%",
 							display: "flex",
@@ -131,7 +132,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 							alignItems: "center",
 						}}
 					>
-						<ListItem key={item.id} onClick={() => router.push(item.link)}>
+						<ListItem onClick={() => router.push(item.link)}>
 							<ListItemButton sx={{ textAlign: "center" }}>
 								<item.icon color="#F56565" style={{ marginInline: 6 }} />
 								<Typography
