@@ -18,8 +18,11 @@ export default function Footer() {
 							Sobre Nós
 						</Typography>
 						<Typography variant="body2" color="text.secondary">
-							We are XYZ company, dedicated to providing the best service to our
-							customers.
+							Fundada com o propósito de incentivar a criatividade e o espírito
+							científico entre os jovens, nossa empresa visa fornecer uma
+							plataforma onde estudantes possam compartilhar suas descobertas,
+							insights e perspectivas únicas através de artigos científicos
+							desenvolvidos em suas escolas.
 						</Typography>
 					</Grid>
 					<Grid item xs={12} sm={4} id="contact">
