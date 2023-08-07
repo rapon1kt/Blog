@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
 	title: "Empreender News",
 	description: "Created by rapon1kt",
+	icons: {
+		icon: "/assets/logo.png",
+	},
 };
 
 export default function RootLayout({
