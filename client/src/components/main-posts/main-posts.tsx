@@ -21,7 +21,7 @@ export default async function MainPosts({
 		method: "get",
 		headers: {
 			"Content-type": "application/json",
-			Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YzgzMDk0NTlkOTIzZmExNDBlMjNlZSIsImlhdCI6MTY5MDg0MTI0Nn0.D-abBYEtLB6Qgu_YX8ndqROMrX6JgHe9kvc3_nreKjU`,
+			Authorization: `Bearer ${token}`,
 		},
 	});
 
@@ -61,9 +61,7 @@ export default async function MainPosts({
 							sx={{
 								pt: "56.25%",
 							}}
-							image={`/assets/posts/${
-								post.picturesPaths![post.picturesPaths?.length! > 0 ? index : 0]
-							}`}
+							image={`/assets/posts/${post.picturesPaths![0]}`}
 						/>
 						<CardContent sx={{ flexGrow: 1 }}>
 							<Typography gutterBottom variant="h5" component="h2">
@@ -98,13 +96,3 @@ export default async function MainPosts({
 		</Grid>
 	);
 }
-
-let index = 0;
-
-function change() {
-	index > 1 ? (index = 0) : index++;
-}
-
-window.onload = function () {
-	setInterval(change, 2000);
-};
