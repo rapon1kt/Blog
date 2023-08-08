@@ -5,7 +5,7 @@
 	"main": "src/main/server.ts",
 	"scripts": {
 		"dev": "ts-node-dev --respawn --transpile-only src/main/server.ts",
-		"build": "tsup src",
+		"build": "tsc src",
 		"start": "node dist/src/main/server.js"
 	},
 	"keywords": [],
