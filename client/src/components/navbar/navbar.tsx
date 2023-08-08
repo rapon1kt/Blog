@@ -9,6 +9,8 @@ import {
 	UserIcon,
 	LogOut,
 	User2Icon,
+	Moon,
+	Sun,
 } from "lucide-react";
 import {
 	Avatar,
@@ -26,12 +28,14 @@ import {
 	IconButton,
 	Drawer,
 	Stack,
+	useTheme,
 } from "@mui/material";
 import { Copyright } from "@/components";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setLogout } from "@/state/state";
 import { User } from "@/models";
+import { ColorModeContext } from "@/styles/theme";
 
 interface NavbarProps {
 	props?: () => Window;
@@ -61,6 +65,11 @@ const navLinks = [
 ];
 
 export default function NavBar({ props, token, user }: NavbarProps) {
+	// THEME CONFIG
+	const theme = useTheme();
+	const colorMode = React.useContext(ColorModeContext);
+
+	// ROUTER CONFIG
 	const router = useRouter();
 
 	// STATES CONFIGS
@@ -133,8 +142,10 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 						}}
 					>
 						<ListItem onClick={() => router.push(item.link)}>
-							<ListItemButton sx={{ textAlign: "center" }}>
-								<item.icon color="#F56565" style={{ marginInline: 6 }} />
+							<ListItemButton
+								sx={{ textAlign: "center", color: "alternative" }}
+							>
+								<item.icon style={{ marginInline: 6 }} />
 								<Typography
 									variant="h6"
 									align="right"
@@ -159,10 +170,32 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 						alignItems: "center",
 					}}
 				>
+					<ListItem key={4} onClick={colorMode.toggleColorMode}>
+						<ListItemButton sx={{ textAlign: "center", color: "alternative" }}>
+							{theme.palette.mode === "light" ? (
+								<Moon style={{ marginInline: 6 }} />
+							) : (
+								<Sun style={{ marginInline: 6 }} />
+							)}
+							<Typography
+								variant="h6"
+								align="right"
+								sx={{
+									color: "text.secondary",
+									textDecoration: "none",
+									width: "100%",
+								}}
+							>
+								Mudar tema
+							</Typography>
+						</ListItemButton>
+					</ListItem>
 					{token ? (
 						<ListItem key={4} onClick={() => dispatch(setLogout())}>
-							<ListItemButton sx={{ textAlign: "center" }}>
-								<LogOut color="#F56565" style={{ marginInline: 6 }} />
+							<ListItemButton
+								sx={{ textAlign: "center", color: "alternative" }}
+							>
+								<LogOut style={{ marginInline: 6 }} />
 								<Typography
 									variant="h6"
 									align="right"
@@ -179,7 +212,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 					) : (
 						<ListItem key={5} onClick={() => router.push("/login")}>
 							<ListItemButton sx={{ textAlign: "center" }}>
-								<LogInIcon color="#F56565" style={{ marginInline: 6 }} />
+								<LogInIcon style={{ marginInline: 6 }} />
 								<Typography
 									variant="h6"
 									align="right"
@@ -229,7 +262,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 						onClick={handleDrawerToggle}
 						sx={{ mr: 2, display: { sm: "none" } }}
 					>
-						<MenuIcon color="#F56565" />
+						<MenuIcon />
 					</IconButton>
 					<Avatar
 						src="/assets/logo.png"
@@ -250,32 +283,76 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 					>
 						Colégio Empreender
 					</Typography>
-					<Box sx={{ display: { xs: "none", sm: "block" }, gap: 0.5 }}>
+					<Box
+						sx={{
+							display: { xs: "none", sm: "block" },
+							justifyContent: "space-around",
+						}}
+					>
 						{navLinks.map((item) => (
 							<Button
 								key={item.id}
-								sx={{ color: "#fff", gap: 0.5 }}
+								sx={{
+									color: "alternative",
+									gap: 0.5,
+									bgcolor: "background.paper",
+									marginInline: "0.4rem",
+								}}
 								onClick={() => router.push(item.link)}
 							>
-								<item.icon color="#F56565" />
-								{item.name}
+								<item.icon />
+								<Typography variant="body2" color="text.secondary">
+									{item.name}
+								</Typography>
 							</Button>
 						))}
+						<Button
+							sx={{
+								color: "alternative",
+								gap: 0.5,
+								bgcolor: "background.paper",
+								marginInline: "0.4rem",
+							}}
+							onClick={colorMode.toggleColorMode}
+						>
+							{theme.palette.mode === "light" ? (
+								<Moon style={{ marginInline: 6 }} />
+							) : (
+								<Sun style={{ marginInline: 6 }} />
+							)}
+							<Typography variant="body2" color="text.secondary">
+								Tema
+							</Typography>
+						</Button>
 						{token ? (
 							<Button
-								sx={{ color: "#fff", gap: 0.5 }}
+								sx={{
+									color: "alternative",
+									gap: 0.5,
+									bgcolor: "background.paper",
+									marginInline: "0.4rem",
+								}}
 								onClick={() => dispatch(setLogout())}
 							>
-								<LogOut color="#F56565" />
-								Sair
+								<LogOut />
+								<Typography variant="body2" color="text.secondary">
+									Sair
+								</Typography>
 							</Button>
 						) : (
 							<Button
-								sx={{ color: "#fff", gap: 0.5 }}
+								sx={{
+									color: "alternative",
+									gap: 0.5,
+									bgcolor: "background.paper",
+									marginInline: "0.4rem",
+								}}
 								onClick={() => router.push("/login")}
 							>
-								<LogInIcon color="#F56565" />
-								Entrar
+								<LogInIcon />
+								<Typography variant="body2" color="text.secondary">
+									Entrar
+								</Typography>
 							</Button>
 						)}
 					</Box>
@@ -288,8 +365,9 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 									aria-haspopup="true"
 									aria-expanded={open ? "true" : undefined}
 									onClick={handleClick}
+									sx={{ color: "alternative" }}
 								>
-									<UserIcon color="#F56565" />
+									<UserIcon />
 								</IconButton>
 								<Menu
 									id="basic-menu"
@@ -302,16 +380,16 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 								>
 									<MenuItem
 										onClick={() => router.push(`/profile/${user._id}`)}
-										sx={{ gap: 1 }}
+										sx={{ gap: 1, color: "alternative" }}
 									>
-										<User2Icon color="#F56565" />
+										<User2Icon />
 										My account
 									</MenuItem>
 									<MenuItem
 										onClick={() => dispatch(setLogout())}
-										sx={{ gap: 1 }}
+										sx={{ gap: 1, color: "alternative" }}
 									>
-										<LogOut color="#F56565" />
+										<LogOut />
 										Logout
 									</MenuItem>
 								</Menu>
