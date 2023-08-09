@@ -1,9 +1,19 @@
 "use client";
-import { Box, Divider, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+	Box,
+	Divider,
+	Stack,
+	Typography,
+	useMediaQuery,
+	useTheme,
+} from "@mui/material";
 import { BadgeCheck, PersonStanding, Rocket } from "lucide-react";
 
 export default function Features() {
 	const mediumSize = useMediaQuery("(min-width: 1300px)");
+	const theme = useTheme();
+
+	const alternative = theme.palette.mode === "light" ? "#407BFF" : "#F56565";
 
 	return (
 		<Box
@@ -31,7 +41,11 @@ export default function Features() {
 				</Typography>
 				{mediumSize && (
 					<img
-						src="/assets/attached2.png"
+						src={
+							theme.palette.mode === "dark"
+								? "/assets/attached2-dark.png"
+								: "/assets/attached2-light.png"
+						}
 						alt="picture"
 						width={500}
 						height={500}
@@ -79,7 +93,7 @@ export default function Features() {
 							}}
 							gutterBottom
 						>
-							<Rocket color="#F56565" style={{ marginInline: 5 }} />
+							<Rocket color={alternative} style={{ marginInline: 5 }} />
 							Visão de futuro
 						</Typography>
 						<Typography variant="subtitle1" color="text.secondary">
@@ -110,7 +124,7 @@ export default function Features() {
 							}}
 							gutterBottom
 						>
-							<PersonStanding color="#F56565" style={{ marginInline: 5 }} />
+							<PersonStanding color={alternative} style={{ marginInline: 5 }} />
 							Facilidade
 						</Typography>
 						<Typography variant="subtitle1" color="text.secondary">
@@ -138,7 +152,7 @@ export default function Features() {
 						}}
 						gutterBottom
 					>
-						<BadgeCheck color="#F56565" style={{ marginInline: 5 }} />
+						<BadgeCheck color={alternative} style={{ marginInline: 5 }} />
 						Compromisso
 					</Typography>
 					<Typography variant="subtitle1" color="text.secondary">
