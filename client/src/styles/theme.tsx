@@ -1,24 +1,44 @@
 "use client";
 import React from "react";
 import { createTheme, ThemeProvider, PaletteMode } from "@mui/material";
+import { grey } from "@mui/material/colors";
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = React.createContext({
+	toggleColorMode: () => {},
+});
 
 const mainTheme = (mode: PaletteMode) => ({
 	palette: {
 		mode,
-		primary: {
-			main: "#fff",
-		},
-		text: {
-			primary: "rgba(255, 255, 245, .86)",
-			secondary: "rgba(235, 235, 245, .6)",
-		},
-		background: {
-			default: "#1e1e20",
-			paper: "#252529",
-		},
-		alternative: "#F56565",
+		...(mode === "light"
+			? {
+					primary: {
+						main: "#black",
+					},
+					text: {
+						primary: grey[900],
+						secondary: grey[800],
+					},
+					background: {
+						default: "#e1e1e3",
+						paper: "#fff",
+					},
+					alternative: "#407BFF",
+			  }
+			: {
+					primary: {
+						main: "#fff",
+					},
+					text: {
+						primary: "rgba(255, 255, 245, .86)",
+						secondary: "rgba(235, 235, 245, .6)",
+					},
+					background: {
+						default: "#1e1e20",
+						paper: "#252529",
+					},
+					alternative: "#F56565",
+			  }),
 	},
 });
 
