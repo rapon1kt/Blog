@@ -21,7 +21,7 @@ export default async function MainPosts({
 		method: "get",
 		headers: {
 			"Content-type": "application/json",
-			Authorization: `Bearer ${token}`,
+			Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
 		},
 	});
 
@@ -74,7 +74,7 @@ export default async function MainPosts({
 								<Button
 									size="small"
 									onClick={() => router.push(`/posts/${post._id}`)}
-									sx={{ color: "#F56565" }}
+									sx={{ color: "alternative" }}
 								>
 									Veja o artigo completo, aqui!
 								</Button>
@@ -84,7 +84,7 @@ export default async function MainPosts({
 								<Button
 									size="small"
 									onClick={() => router.push("/login")}
-									sx={{ color: "#F56565" }}
+									sx={{ color: "alternative" }}
 								>
 									Faça login para ver o conteúdo!
 								</Button>
