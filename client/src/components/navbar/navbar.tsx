@@ -11,6 +11,7 @@ import {
 	User2Icon,
 	Moon,
 	Sun,
+	LayoutDashboard,
 } from "lucide-react";
 import {
 	Avatar,
@@ -93,6 +94,8 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
+
+	const alternative = theme.palette.mode === "dark" ? "#F56565" : "#407BFF";
 
 	const drawer = (
 		<Box
@@ -186,7 +189,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 									width: "100%",
 								}}
 							>
-								Mudar tema
+								Tema
 							</Typography>
 						</ListItemButton>
 					</ListItem>
@@ -195,7 +198,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 							<ListItemButton
 								sx={{ textAlign: "center", color: "alternative" }}
 							>
-								<LogOut style={{ marginInline: 6 }} />
+								<LogOut style={{ marginInline: 6, color: alternative }} />
 								<Typography
 									variant="h6"
 									align="right"
@@ -212,7 +215,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 					) : (
 						<ListItem key={5} onClick={() => router.push("/login")}>
 							<ListItemButton sx={{ textAlign: "center" }}>
-								<LogInIcon style={{ marginInline: 6 }} />
+								<LogInIcon style={{ marginInline: 6, color: alternative }} />
 								<Typography
 									variant="h6"
 									align="right"
@@ -256,11 +259,10 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 					}}
 				>
 					<IconButton
-						color="inherit"
 						aria-label="open drawer"
 						edge="start"
 						onClick={handleDrawerToggle}
-						sx={{ mr: 2, display: { sm: "none" } }}
+						sx={{ mr: 2, display: { sm: "none" }, color: "alternative" }}
 					>
 						<MenuIcon />
 					</IconButton>
@@ -285,7 +287,8 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 					</Typography>
 					<Box
 						sx={{
-							display: { xs: "none", sm: "block" },
+							display: { xs: "none", sm: "none", md: "block" },
+							alignItems: "center",
 							justifyContent: "space-around",
 						}}
 					>
@@ -296,7 +299,7 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 									color: "alternative",
 									gap: 0.5,
 									bgcolor: "background.paper",
-									marginInline: "0.4rem",
+									margin: "0.4rem",
 								}}
 								onClick={() => router.push(item.link)}
 							>
@@ -356,45 +359,66 @@ export default function NavBar({ props, token, user }: NavbarProps) {
 							</Button>
 						)}
 					</Box>
-					<Box sx={{ display: { xs: "block", sm: "none" } }}>
-						{token && (
-							<Stack>
-								<IconButton
-									id="basic-button"
-									aria-controls={open ? "basic-menu" : undefined}
-									aria-haspopup="true"
-									aria-expanded={open ? "true" : undefined}
-									onClick={handleClick}
-									sx={{ color: "alternative" }}
+					<Box sx={{ display: { xs: "block", md: "none" } }}>
+						<Button
+							id="basic-button"
+							aria-controls={open ? "basic-menu" : undefined}
+							aria-haspopup="true"
+							aria-expanded={open ? "true" : undefined}
+							onClick={handleClick}
+						>
+							<LayoutDashboard color={alternative} />
+						</Button>
+						<Menu
+							id="basic-menu"
+							anchorEl={anchorEl}
+							open={open}
+							onClose={handleClose}
+							MenuListProps={{
+								"aria-labelledby": "basic-button",
+							}}
+						>
+							{navLinks.map((item) => (
+								<MenuItem
+									key={item.id}
+									sx={{ my: 1, gap: 0.4, mx: 3 }}
+									onClick={() => router.push(item.link)}
 								>
-									<UserIcon />
-								</IconButton>
-								<Menu
-									id="basic-menu"
-									anchorEl={anchorEl}
-									open={open}
-									onClose={handleClose}
-									MenuListProps={{
-										"aria-labelledby": "basic-button",
-									}}
-								>
-									<MenuItem
-										onClick={() => router.push(`/profile/${user._id}`)}
-										sx={{ gap: 1, color: "alternative" }}
-									>
-										<User2Icon />
-										My account
-									</MenuItem>
-									<MenuItem
-										onClick={() => dispatch(setLogout())}
-										sx={{ gap: 1, color: "alternative" }}
-									>
-										<LogOut />
-										Logout
-									</MenuItem>
-								</Menu>
-							</Stack>
-						)}
+									<item.icon color={alternative} />
+									{item.name}
+								</MenuItem>
+							))}
+							<MenuItem
+								sx={{ my: 1, gap: 0.4, mx: 3 }}
+								onClick={colorMode.toggleColorMode}
+							>
+								{theme.palette.mode === "light" ? (
+									<Moon style={{ color: alternative }} />
+								) : (
+									<Sun style={{ color: alternative }} />
+								)}
+								Tema
+							</MenuItem>
+							<MenuItem
+								sx={{ my: 1, gap: 0.4, mx: 3 }}
+								onClick={() => {
+									if (token) return router.push("/login");
+									router.push("/register");
+								}}
+							>
+								{token ? (
+									<>
+										<LogOut color={alternative} />
+										Sair
+									</>
+								) : (
+									<>
+										<LogInIcon color={alternative} />
+										Entrar
+									</>
+								)}
+							</MenuItem>
+						</Menu>
 					</Box>
 				</Toolbar>
 			</AppBar>
