@@ -3,7 +3,13 @@ import { Suspense } from "react";
 import { Check, NewspaperIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { MainPostsSkeleton, MainPosts, Navbar, Features } from "@/components";
+import {
+	MainPostsSkeleton,
+	MainPosts,
+	Navbar,
+	Features,
+	Footer,
+} from "@/components";
 import {
 	useMediaQuery,
 	Container,
@@ -11,12 +17,16 @@ import {
 	Box,
 	Stack,
 	Button,
+	useTheme,
 } from "@mui/material";
 
 export default function Main() {
 	const mobile = useMediaQuery("(max-width:500px)");
 	const { user, token } = useSelector((state: any) => state);
 	const router = useRouter();
+	const theme = useTheme();
+
+	const alternative = theme.palette.mode === "light" ? "#407BFF" : "#F56565";
 
 	return (
 		<Box>
@@ -51,7 +61,7 @@ export default function Main() {
 					>
 						{!mobile && (
 							<NewspaperIcon
-								style={{ color: "#F56565", marginInline: "1rem" }}
+								style={{ color: alternative, marginInline: "1rem" }}
 								size={80}
 							/>
 						)}
@@ -86,7 +96,12 @@ export default function Main() {
 							>
 								Login
 							</Button>
-							<Button variant="outlined" fullWidth href="/register">
+							<Button
+								variant="contained"
+								sx={{ color: "text.primary", bgcolor: "background.default" }}
+								fullWidth
+								href="/register"
+							>
 								Registrar-me
 							</Button>
 						</Stack>
@@ -110,7 +125,11 @@ export default function Main() {
 					}}
 				>
 					<img
-						src="/assets/attached1.png"
+						src={
+							theme.palette.mode === "dark"
+								? "/assets/attached1-dark.png"
+								: "/assets/attached1-light.png"
+						}
 						alt="image"
 						width="100%"
 						height="100%"
@@ -131,7 +150,7 @@ export default function Main() {
 					}}
 					color="text.primary"
 				>
-					<Check color="#F56565" size={60} />
+					<Check color={alternative} size={60} />
 					Alguns Projetos:
 				</Typography>
 				<Typography
@@ -157,6 +176,7 @@ export default function Main() {
 					<MainPosts token={token} router={router} />
 				</Suspense>
 			</Box>
+			<Footer />
 		</Box>
 	);
 }
