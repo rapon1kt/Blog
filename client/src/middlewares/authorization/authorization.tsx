@@ -55,6 +55,6 @@ export default function Authorization({
 			</Box>
 		);
 	} else {
-		return <Children />;
+		return Children;
 	}
 }
