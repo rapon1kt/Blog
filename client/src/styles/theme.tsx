@@ -2,6 +2,8 @@
 import React from "react";
 import { createTheme, ThemeProvider, PaletteMode } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { setMode } from "@/state/state";
 
 export const ColorModeContext = React.createContext({
 	toggleColorMode: () => {},
@@ -43,11 +45,12 @@ const mainTheme = (mode: PaletteMode) => ({
 });
 
 export default function ThemeContextProvider({ children }: any) {
-	const [mode, setMode] = React.useState<"light" | "dark">("light");
+	const { mode } = useSelector((state: any) => state);
+	const dispatch = useDispatch();
 	const colorMode = React.useMemo(
 		() => ({
 			toggleColorMode: () => {
-				setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+				dispatch(setMode());
 			},
 		}),
 		[]
