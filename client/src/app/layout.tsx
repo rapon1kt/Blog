@@ -21,11 +21,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<ThemeContextProvider>
-				<body className={inter.className}>
-					<StateProvider>{children}</StateProvider>
-				</body>
-			</ThemeContextProvider>
+			<body className={inter.className}>
+				<StateProvider>
+					<ThemeContextProvider>{children}</ThemeContextProvider>
+				</StateProvider>
+			</body>
 		</html>
 	);
 }
