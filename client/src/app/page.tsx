@@ -30,7 +30,7 @@ export default function Main() {
 
 	return (
 		<Box>
-			<Navbar user={user} token={token} />
+			<Navbar user={user} token={token} isCover={true} />
 			<Box
 				sx={{
 					display: "flex",
