@@ -13,5 +13,5 @@ export default async function getUser({
 		},
 	});
 	const user = await response.json();
-	return JSON.stringify(user, null, 2);
+	return user;
 }
