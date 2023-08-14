@@ -158,7 +158,7 @@ export default function NavbarDrawer({ token }: { token: string }) {
 						</ListItemButton>
 					</ListItem>
 					{token ? (
-						<ListItem key={4} onClick={() => dispatch(setLogout())}>
+						<ListItem key={5} onClick={() => dispatch(setLogout())}>
 							<ListItemButton
 								sx={{ textAlign: "center", color: "alternative" }}
 							>
