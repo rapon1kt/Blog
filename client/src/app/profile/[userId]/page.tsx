@@ -1,13 +1,59 @@
 "use client";
-import { Footer, Navbar, getUser } from "@/components";
-import { Box } from "@mui/material";
+import React from "react";
+import {
+	Footer,
+	Navbar,
+	UserProfile,
+	ArticlesProfile,
+	VideosProfile,
+	UserProfileSkeleton,
+	ArticlePagination,
+} from "@/components";
+import { Authorization } from "@/middlewares";
+import { User } from "@/models";
+import { Box, Button } from "@mui/material";
 import { Suspense } from "react";
 import { useSelector } from "react-redux";
-import UserProfile from "@/components/user-profile/user-profile";
+import { Newspaper, Video } from "lucide-react";
 
-export default function Profile({ params }: { params: { userId: string } }) {
-	const { token, user } = useSelector((state: any) => state);
-	const userId = params.userId;
+function ProfileContainer({
+	userId,
+	token,
+	user,
+}: {
+	userId: string;
+	token: string;
+	user: User;
+}) {
+	const [state, setState] = React.useState<"videos" | "articles">("articles");
+	const [posts, setPosts] = React.useState([]);
+	const [currentPage, setCurrentPage] = React.useState(1);
+	const [postsPerPage] = React.useState(2);
+
+	React.useEffect(() => {
+		const getPosts = async () => {
+			await fetch(`http://localhost:2007/posts/${userId}/posts`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((res) => res.json())
+				.then((res) => {
+					setPosts(res);
+				});
+		};
+
+		getPosts();
+	}, []);
+
+	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfFirstPost = indexOfLastPost - postsPerPage;
+	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
 	return (
 		<Box
 			sx={{
@@ -15,58 +61,87 @@ export default function Profile({ params }: { params: { userId: string } }) {
 				flexDirection: "column",
 				justifyContent: "space-between",
 				bgcolor: "background.paper",
-				mt: 6,
+				mt: 3,
 				pt: 8,
 			}}
 		>
-			<Suspense fallback={"Carregando..."}>
-				{getUser({ userId, token }).then((user) => (
-					<Navbar isCover={false} user={user} token={token} />
-				))}
+			<Navbar isCover={false} user={user} token={token} />
+			<Box
+				sx={{
+					display: "flex",
+					justifyContent: "space-evenly",
+					alignItems: "center",
+					flexDirection: {
+						xs: "column",
+						lg: "row",
+					},
+					gap: 5,
+					mb: 2,
+				}}
+			>
+				<Suspense fallback={<UserProfileSkeleton />}>
+					<UserProfile token={token} userId={userId} currentUser={user} />
+				</Suspense>
 				<Box
 					sx={{
 						display: "flex",
-						justifyContent: "space-around",
 						alignItems: "center",
-						flexDirection: {
-							xs: "column",
-							md: "row",
-						},
+						flexDirection: "column",
+						bgcolor: "background.default",
+						boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+						minHeight: "80vh",
+						borderRadius: "16px",
+						p: 1,
 					}}
 				>
-					<UserProfile
-						token={token}
-						userId={userId}
-						currentUser={user}
-						user={user}
-					/>
-					<Box
+					<Button
+						onClick={() =>
+							setState((prevSate) =>
+								prevSate === "videos" ? "articles" : "videos"
+							)
+						}
+						variant="outlined"
 						sx={{
-							display: "flex",
-							flexDirection: "column",
-							width: {
-								lg: "25vw",
-								md: "50vw",
-								sm: "100vw",
-								xs: "100vw",
-							},
+							color: "white",
+							gap: "1rem",
+							fontSize: "20px",
+							my: 1,
 						}}
-					></Box>
-					<Box
-						sx={{
-							display: "flex",
-							flexDirection: "column",
-							width: {
-								lg: "25vw",
-								md: "50vw",
-								sm: "100vw",
-								xs: "100vw",
-							},
-						}}
-					></Box>
+					>
+						{state === "videos" ? <Video size={30} /> : <Newspaper size={30} />}
+						{state === "videos" ? "Vídeos" : "Artigos"}
+					</Button>
+					{state === "videos" ? (
+						<VideosProfile />
+					) : (
+						<>
+							<ArticlesProfile
+								posts={currentPosts}
+								userId={userId}
+								user={user}
+							/>
+							<ArticlePagination
+								totalPosts={posts.length}
+								paginate={paginate}
+							/>
+						</>
+					)}
 				</Box>
-			</Suspense>
+			</Box>
 			<Footer />
 		</Box>
 	);
+}
+
+export default function Profile({ params }: { params: { userId: string } }) {
+	const token = useSelector((state: { token: string }) => state.token);
+	const user = useSelector((state: { user: User }) => state.user);
+
+	return Authorization({
+		Children: (
+			<ProfileContainer userId={params.userId} token={token} user={user} />
+		),
+		token,
+		user,
+	});
 }
