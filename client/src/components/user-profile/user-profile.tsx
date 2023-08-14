@@ -64,52 +64,78 @@ export default async function UserProfileContainer({
 				bgcolor: "background.default",
 				display: "flex",
 				alignItems: "center",
-				flexDirection: "column",
+				justifyContent: {
+					xs: "center",
+					md: "space-around",
+					lg: "center",
+				},
+				flexDirection: {
+					xs: "column",
+					md: "row",
+					lg: "column",
+				},
 				width: {
-					lg: "25vw",
-					md: "50vw",
+					lg: "30vw",
+					md: "80vw",
 					sm: "90vw",
 					xs: "90vw",
 				},
 				p: "1rem",
 				borderRadius: "1rem",
+				gap: {
+					md: "5rem",
+					lg: 0,
+				},
+				boxShadow: "0 0.5rem 1rem rgba(0, 0, 0, 0.15)",
+				minHeight: {
+					lg: "80vh",
+				},
 			}}
 		>
-			<Avatar
-				src={`/assets/users/${user.avatar_url}`}
+			<Box
 				sx={{
-					width: 150,
-					height: 150,
-					mb: 1,
-					border: `2px solid white`,
-					color: "alternative",
-					bgcolor: "background.paper",
+					display: "flex",
+					flexDirection: "column",
+					textAlign: "center",
+					alignItems: "center",
 				}}
 			>
-				<UserIcon size={80} />
-			</Avatar>
-			{userId === "64cfc1f81625495c5b57e16d" && (
-				<Stack
+				<Avatar
+					src={`/assets/users/${user.avatar_url}`}
 					sx={{
-						display: "flex",
-						gap: "2rem",
-						flexDirection: "row",
-						justifyContent: "center",
-						alignItems: "center",
-						mb: 2,
+						width: 150,
+						height: 150,
+						mb: 1,
+						border: `2px solid white`,
+						color: "alternative",
+						bgcolor: "background.paper",
 					}}
 				>
-					<Gem color="red" />
-					<Code color="red" />
-				</Stack>
-			)}
-			<Typography color="text.primary" gutterBottom>
-				{new Date(user.birthday).toLocaleDateString()}
-			</Typography>
+					<UserIcon size={80} />
+				</Avatar>
+				{userId === "64cfc1f81625495c5b57e16d" && (
+					<Stack
+						sx={{
+							display: "flex",
+							gap: "2rem",
+							flexDirection: "row",
+							justifyContent: "center",
+							alignItems: "center",
+							mb: 2,
+						}}
+					>
+						<Gem color="red" />
+						<Code color="red" />
+					</Stack>
+				)}
+				<Typography color="text.primary" gutterBottom>
+					{new Date(user.birthday).toLocaleDateString()}
+				</Typography>
 
-			<Typography color="alternative" variant="h5" gutterBottom>
-				{user.name}
-			</Typography>
+				<Typography color="alternative" variant="h5" gutterBottom>
+					{user.name}
+				</Typography>
+			</Box>
 			<Box
 				sx={{
 					display: "flex",
