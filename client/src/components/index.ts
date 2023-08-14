@@ -6,3 +6,7 @@ export { default as MainPosts } from "./main-posts/main-posts";
 export { default as MainPostsSkeleton } from "./main-posts-skeleton/main-posts-skeleton";
 export { default as Features } from "./features/features";
 export { default as UserProfile } from "./user-profile/user-profile";
+export { default as ArticlesProfile } from "./articles-profile/articles-profile";
+export { default as VideosProfile } from "./videos-profile/videos-profile";
+export { default as UserProfileSkeleton } from "./user-profile-skeleton/user-profile-skeleton";
+export { default as ArticlePagination } from "./pagination/article-pagination";
