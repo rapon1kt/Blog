@@ -22,8 +22,8 @@ const mainTheme = (mode: PaletteMode) => ({
 						secondary: grey[800],
 					},
 					background: {
-						default: "#e1e1e3",
-						paper: "#fff",
+						default: "#fff",
+						paper: "#e1e1e3",
 					},
 					alternative: "#407BFF",
 			  }
