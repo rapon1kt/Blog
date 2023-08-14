@@ -203,7 +203,7 @@ export default function Login() {
 										</Link>
 									</Grid>
 								</Grid>
-								<Copyright sx={{ mt: 5 }} />
+								<Copyright />
 							</Box>
 						</Box>
 					</Grid>
