@@ -37,7 +37,10 @@ export default function NavbarAuth({
 					marginInline: 1,
 					...props,
 				}}
-				onClick={() => dispatch(setLogout())}
+				onClick={() => {
+					dispatch(setLogout());
+					router.push("/");
+				}}
 			>
 				<LogOutIcon
 					size={24}
