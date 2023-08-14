@@ -5,3 +5,4 @@ export { default as Footer } from "./footer/footer";
 export { default as MainPosts } from "./main-posts/main-posts";
 export { default as MainPostsSkeleton } from "./main-posts-skeleton/main-posts-skeleton";
 export { default as Features } from "./features/features";
+export { default as UserProfile } from "./user-profile/user-profile";
