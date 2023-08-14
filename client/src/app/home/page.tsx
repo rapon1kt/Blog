@@ -8,7 +8,6 @@ import {
 	Card,
 	CardMedia,
 	Grid,
-	Stack,
 	Typography,
 	useTheme,
 } from "@mui/material";
@@ -143,7 +142,8 @@ function HomeContainer({ user, token }: { user: User; token: string }) {
 }
 
 export default function Home() {
-	const { user, token } = useSelector((state: any) => state);
+	const user = useSelector((state: any) => state.user);
+	const token = useSelector((state: any) => state.token);
 	return Authorization({
 		Children: <HomeContainer token={token} user={user} />,
 		token,

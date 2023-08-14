@@ -45,7 +45,7 @@ const mainTheme = (mode: PaletteMode) => ({
 });
 
 export default function ThemeContextProvider({ children }: any) {
-	const { mode } = useSelector((state: any) => state);
+	const mode = useSelector((state: any) => state.mode);
 	const dispatch = useDispatch();
 	const colorMode = React.useMemo(
 		() => ({

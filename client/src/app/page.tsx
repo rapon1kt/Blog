@@ -22,7 +22,8 @@ import {
 
 export default function Main() {
 	const mobile = useMediaQuery("(max-width:500px)");
-	const { user, token } = useSelector((state: any) => state);
+	const user = useSelector((state: any) => state.user);
+	const token = useSelector((state: any) => state.token);
 	const router = useRouter();
 	const theme = useTheme();
 
