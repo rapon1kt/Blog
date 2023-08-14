@@ -2,7 +2,7 @@
 import React from "react";
 import { Pagination } from "@mui/material";
 
-const ArticlePagination = ({ totalPosts, paginate }: any) => {
+export default function ArticlePagination({ totalPosts, paginate }: any) {
 	const [page, setPage] = React.useState(1);
 
 	const handleChange = (event: any, newPage: number) => {
@@ -22,6 +22,4 @@ const ArticlePagination = ({ totalPosts, paginate }: any) => {
 			onChange={handleChange}
 		/>
 	);
-};
-
-export default ArticlePagination;
+}
