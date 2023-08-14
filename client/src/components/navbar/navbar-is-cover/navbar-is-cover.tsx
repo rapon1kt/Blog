@@ -2,6 +2,7 @@ import { Box, Button, SxProps, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import NavbarTheme from "../navbar-theme/navbar-theme";
 import {
+	Home,
 	HomeIcon,
 	PhoneIcon,
 	SettingsIcon,
@@ -82,24 +83,42 @@ export default function NavbarIsCover({
 	} else {
 		return (
 			<Box sx={props?.box}>
-				<Button
-					variant="contained"
-					sx={{
-						textTransform: "none",
-						color: "text.primary",
-						bgcolor: "background.paper",
-						marginInline: 1,
-						...props?.button,
-					}}
-					onClick={() => router.push(`/profile/${user._id}`)}
-				>
-					<UserIcon
-						size={24}
-						color={alternative}
-						style={{ marginRight: 0.5 }}
-					/>
-					Meu Perfil
-				</Button>
+				{window.location.href ===
+				`http://localhost:3000/profile/${user._id}` ? (
+					<Button
+						variant="contained"
+						sx={{
+							textTransform: "none",
+							color: "text.primary",
+							bgcolor: "background.paper",
+							marginInline: 1,
+							...props?.button,
+						}}
+						onClick={() => router.push(`/home`)}
+					>
+						<Home size={24} color={alternative} style={{ marginRight: 0.5 }} />
+						Home
+					</Button>
+				) : (
+					<Button
+						variant="contained"
+						sx={{
+							textTransform: "none",
+							color: "text.primary",
+							bgcolor: "background.paper",
+							marginInline: 1,
+							...props?.button,
+						}}
+						onClick={() => router.push(`/profile/${user._id}`)}
+					>
+						<UserIcon
+							size={24}
+							color={alternative}
+							style={{ marginRight: 0.5 }}
+						/>
+						Meu Perfil
+					</Button>
+				)}
 				<Button
 					variant="contained"
 					sx={{
