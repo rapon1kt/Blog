@@ -6,3 +6,4 @@ export { default as getUserPosts } from "./posts/getUserPosts";
 export { default as getFeedPost } from "./posts/getFeedPost";
 export { default as updateUser } from "./users/updateUser";
 export { default as createPost } from "./posts/createPost";
+export { default as newComment } from "./posts/newComment";
