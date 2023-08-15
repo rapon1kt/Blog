@@ -1,3 +1,4 @@
+import commentsSchema from "../comments/comments";
 import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
@@ -12,7 +13,7 @@ const postSchema = new mongoose.Schema(
 			max: 1500,
 		},
 		comments: {
-			type: Array,
+			type: [commentsSchema],
 			optional: true,
 			default: [],
 		},
