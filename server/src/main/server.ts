@@ -4,10 +4,15 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import multer from "multer";
-import { userFileStorage, postFileStorage } from "../config/multer";
+import {
+	userFileStorage,
+	postFileStorage,
+	videoFileStorage,
+} from "../config/multer";
 import { authRoutes, postsRoutes, usersRoutes } from "./routes";
-import { createPost, updateUser } from "../controllers";
+import { createPost, createVideo, updateUser } from "../controllers";
 import { verifyToken } from "../middleware";
+import videosRoutes from "./routes/videos/videosRoutes";
 
 // CONFIGURATIONS
 
@@ -27,17 +32,20 @@ const postUpload = multer({ storage: postFileStorage }).fields([
 	},
 	{ name: "archive", maxCount: 1 },
 ]);
+const videoUpload = multer({ storage: videoFileStorage }).single("video");
 
 // ROUTES WITH FILES
 
 app.post("/posts/:userId", verifyToken, postUpload, createPost);
 app.put("/users/:id", verifyToken, userUpload, updateUser);
+app.post("/videos/:userId", verifyToken, videoUpload, createVideo);
 
 // ROUTES
 
 app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/posts", postsRoutes);
+app.use("/videos", videosRoutes);
 
 // MONGOOSE CONFIGURATION
 const PORT = process.env.PORT || 3001;
