@@ -13,7 +13,7 @@ export const videoSchema = new mongoose.Schema(
 		},
 		url: {
 			type: String,
-			required: true,
+			optional: true,
 			default: "",
 		},
 		comments: {
