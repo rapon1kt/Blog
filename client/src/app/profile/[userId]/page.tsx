@@ -6,15 +6,16 @@ import {
 	UserProfile,
 	ArticlesProfile,
 	VideosProfile,
-	UserProfileSkeleton,
 	ArticlePagination,
+	getUser,
+	UserProfileSkeleton,
 } from "@/components";
 import { Authorization } from "@/middlewares";
 import { User } from "@/models";
 import { Box, Button } from "@mui/material";
-import { Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Newspaper, Video } from "lucide-react";
+import VideoPagination from "@/components/pagination/video-pagination";
 
 function ProfileContainer({
 	userId,
@@ -27,8 +28,12 @@ function ProfileContainer({
 }) {
 	const [state, setState] = React.useState<"videos" | "articles">("articles");
 	const [posts, setPosts] = React.useState([]);
-	const [currentPage, setCurrentPage] = React.useState(1);
+	const [videos, setVideos] = React.useState([]);
+	const [profileUser, setProfileUser] = React.useState<User>();
+	const [currentPost, setCurrentArticle] = React.useState(1);
+	const [currentVideo, setCurrentVideo] = React.useState(1);
 	const [postsPerPage] = React.useState(2);
+	const [videosPerPage] = React.useState(1);
 
 	React.useEffect(() => {
 		const getPosts = async () => {
@@ -45,14 +50,40 @@ function ProfileContainer({
 				});
 		};
 
+		const getVideos = async () => {
+			await fetch(`http://localhost:2007/videos/${userId}/videos`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${token}`,
+				},
+			})
+				.then((res) => res.json())
+				.then((res) => {
+					setVideos(res);
+				});
+		};
+
+		const getProfileUser = async () => {
+			const user: User = await getUser({ token, userId });
+			setProfileUser(user);
+		};
+
+		getVideos();
+		getProfileUser();
 		getPosts();
 	}, []);
 
-	const indexOfLastPost = currentPage * postsPerPage;
+	const indexOfLastPost = currentPost * postsPerPage;
 	const indexOfFirstPost = indexOfLastPost - postsPerPage;
 	const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-	const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+	const indexOfLastVideo = currentVideo * videosPerPage;
+	const indexOfFirstVideo = indexOfLastVideo - videosPerPage;
+	const currentVideos = videos.slice(indexOfFirstVideo, indexOfLastVideo);
+
+	const articlePaginate = (pageNumber: number) => setCurrentArticle(pageNumber);
+	const videoPaginate = (pageNumber: number) => setCurrentVideo(pageNumber);
 
 	return (
 		<Box
@@ -79,9 +110,11 @@ function ProfileContainer({
 					mb: 2,
 				}}
 			>
-				<Suspense fallback={<UserProfileSkeleton />}>
-					<UserProfile token={token} userId={userId} currentUser={user} />
-				</Suspense>
+				{profileUser ? (
+					<UserProfile userId={userId} user={profileUser!} currentUser={user} />
+				) : (
+					<UserProfileSkeleton />
+				)}
 				<Box
 					sx={{
 						display: "flex",
@@ -102,7 +135,8 @@ function ProfileContainer({
 						}
 						variant="outlined"
 						sx={{
-							color: "white",
+							color: "text.primary",
+							outlineColor: "text.primary",
 							gap: "1rem",
 							fontSize: "20px",
 							my: 1,
@@ -112,7 +146,17 @@ function ProfileContainer({
 						{state === "videos" ? "Vídeos" : "Artigos"}
 					</Button>
 					{state === "videos" ? (
-						<VideosProfile />
+						<>
+							<VideosProfile
+								user={user}
+								userId={userId}
+								videos={currentVideos}
+							/>
+							<VideoPagination
+								totalVideos={videos.length}
+								paginate={videoPaginate}
+							/>
+						</>
 					) : (
 						<>
 							<ArticlesProfile
@@ -122,7 +166,7 @@ function ProfileContainer({
 							/>
 							<ArticlePagination
 								totalPosts={posts.length}
-								paginate={paginate}
+								paginate={articlePaginate}
 							/>
 						</>
 					)}
