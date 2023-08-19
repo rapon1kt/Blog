@@ -51,3 +51,28 @@ export const postFileStorage = multer.diskStorage({
 		});
 	},
 });
+
+export const videoFileStorage = multer.diskStorage({
+	destination(req, file, callback) {
+		callback(
+			null,
+			path.resolve(
+				__dirname,
+				"..",
+				"..",
+				"..",
+				"client",
+				"public",
+				"assets",
+				"videos"
+			)
+		);
+	},
+	filename(req, file, callback) {
+		crypto.randomBytes(16, (err, hash) => {
+			if (err) callback(err, err.message);
+			const filename = `${hash.toString("hex")}-${file.originalname}`;
+			callback(null, filename);
+		});
+	},
+});
