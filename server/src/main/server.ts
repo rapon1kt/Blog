@@ -32,7 +32,16 @@ const postUpload = multer({ storage: postFileStorage }).fields([
 	},
 	{ name: "archive", maxCount: 1 },
 ]);
-const videoUpload = multer({ storage: videoFileStorage }).single("video");
+const videoUpload = multer({ storage: videoFileStorage }).fields([
+	{
+		name: "video",
+		maxCount: 1,
+	},
+	{
+		name: "thumbnail",
+		maxCount: 1,
+	},
+]);
 
 // ROUTES WITH FILES
 
