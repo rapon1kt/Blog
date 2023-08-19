@@ -6,13 +6,14 @@ export default async function createVideo(req: Request, res: Response) {
 		// get informations from request
 		const { userId } = req.params;
 		const { title, description } = req.body;
-		const video = req.file;
+		const uploads: any = req.files;
 		// create the new post
 		const newVideo = new Video({
 			title,
 			description,
-			url: video?.filename,
+			url: uploads.video[0].filename,
 			owner: userId,
+			thumbnail: uploads.thumbnail[0].filename,
 		});
 		const createdVideo = await newVideo.save();
 		// send this post to client
