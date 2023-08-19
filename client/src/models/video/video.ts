@@ -1,9 +1,11 @@
 import Comments from "../comments/comments";
 
 export default interface Video {
-	title: String;
-	description: String;
-	url: String;
+	_id: string;
+	title: string;
+	description: string;
+	url: string;
+	thumbnail: string;
 	comments: Array<Comments>;
 	createdAt: Date;
 	updatedAt: Date;
