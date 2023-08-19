@@ -12,11 +12,9 @@ export default function ArticlePagination({ totalPosts, paginate }: any) {
 
 	const count = totalPosts / 2;
 
-	console.log(count);
-
 	return (
 		<Pagination
-			count={count}
+			count={parseInt(count.toPrecision(1))}
 			page={page}
 			defaultPage={1}
 			onChange={handleChange}
