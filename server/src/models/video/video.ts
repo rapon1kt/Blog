@@ -16,6 +16,11 @@ export const videoSchema = new mongoose.Schema(
 			optional: true,
 			default: "",
 		},
+		thumbnail: {
+			type: String,
+			optional: true,
+			default: "",
+		},
 		comments: {
 			type: [commentsSchema],
 			optional: true,
