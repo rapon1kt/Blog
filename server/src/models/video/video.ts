@@ -21,6 +21,11 @@ export const videoSchema = new mongoose.Schema(
 			optional: true,
 			default: [],
 		},
+		owner: {
+			type: mongoose.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
 	},
 	{ timestamps: true }
 );
