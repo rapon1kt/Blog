@@ -9,10 +9,12 @@ export default function NavbarMenu({
 	token,
 	user,
 	isCover,
+	params,
 }: {
 	token: string;
 	user: User;
 	isCover: boolean;
+	params?: { userId: string };
 }) {
 	const theme = useTheme();
 
@@ -50,6 +52,7 @@ export default function NavbarMenu({
 				}}
 			>
 				<NavbarIsCover
+					params={params}
 					isCover={isCover}
 					token={token}
 					user={user}

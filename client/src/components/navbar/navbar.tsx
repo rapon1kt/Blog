@@ -20,9 +20,18 @@ interface NavbarProps {
 	token?: string;
 	user: User;
 	isCover: boolean;
+	params?: {
+		userId: string;
+	};
 }
 
-export default function NavBar({ props, token, user, isCover }: NavbarProps) {
+export default function NavBar({
+	props,
+	token,
+	user,
+	isCover,
+	params,
+}: NavbarProps) {
 	// DRAWER OPTIONS
 	const window = props;
 	const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -79,9 +88,19 @@ export default function NavBar({ props, token, user, isCover }: NavbarProps) {
 							justifyContent: "space-around",
 						}}
 					>
-						<NavbarIsCover token={token!} user={user} isCover={isCover} />
+						<NavbarIsCover
+							params={params}
+							token={token!}
+							user={user}
+							isCover={isCover}
+						/>
 					</Box>
-					<NavbarMenu isCover={isCover} user={user} token={token!} />
+					<NavbarMenu
+						params={params}
+						isCover={isCover}
+						user={user}
+						token={token!}
+					/>
 				</Toolbar>
 			</AppBar>
 			<Box component="nav">

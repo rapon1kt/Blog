@@ -38,6 +38,7 @@ export default function NavbarIsCover({
 	user,
 	token,
 	props,
+	params,
 }: {
 	isCover: boolean;
 	user: User;
@@ -46,6 +47,7 @@ export default function NavbarIsCover({
 		box?: SxProps;
 		button?: SxProps;
 	};
+	params?: { userId: string };
 }) {
 	const theme = useTheme();
 	const router = useRouter();
@@ -83,8 +85,7 @@ export default function NavbarIsCover({
 	} else {
 		return (
 			<Box sx={props?.box}>
-				{window.location.href ===
-				`http://localhost:3000/profile/${user._id}` ? (
+				{params?.userId ? (
 					<Button
 						variant="contained"
 						sx={{
