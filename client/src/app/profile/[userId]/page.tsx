@@ -96,7 +96,7 @@ function ProfileContainer({
 				pt: 8,
 			}}
 		>
-			<Navbar isCover={false} user={user} token={token} />
+			<Navbar params={{ userId }} isCover={false} user={user} token={token} />
 			<Box
 				sx={{
 					display: "flex",
