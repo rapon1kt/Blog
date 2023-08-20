@@ -33,7 +33,8 @@ const initialValuesLogin = {
 };
 
 export default function Login() {
-	const [alertBoolean, setAlertBoolean] = React.useState("any");
+	const [response, setResponse] = React.useState(0);
+	const [responseMessage, setResponseMessage] = React.useState("");
 	const dispatch = useDispatch();
 	const router = useRouter();
 
@@ -43,9 +44,15 @@ export default function Login() {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(values),
 		});
-		const loggedIn = await loggedInResponse.json();
-		if (loggedIn) {
-			setAlertBoolean("true");
+
+		if (loggedInResponse.status === 400) {
+			const responseMessage = await loggedInResponse.json();
+			setResponse(400);
+			setResponseMessage(responseMessage.msg);
+		} else if (loggedInResponse.status == 200) {
+			const loggedIn = await loggedInResponse.json();
+			setResponse(200);
+			setResponseMessage("Logado com Sucesso!");
 			dispatch(
 				setLogin({
 					user: loggedIn.user,
@@ -56,7 +63,9 @@ export default function Login() {
 				router.push("/home");
 			}, 1000);
 		} else {
-			setAlertBoolean("false");
+			setResponseMessage(
+				"Parece que algo de errado aconteceu, tente novamente depois."
+			);
 		}
 	};
 
@@ -77,8 +86,6 @@ export default function Login() {
 				handleBlur,
 				handleChange,
 				handleSubmit,
-				setFieldValue,
-				resetForm,
 			}) => (
 				<Grid container component="main">
 					<CssBaseline />
@@ -136,19 +143,15 @@ export default function Login() {
 							>
 								Fazer Login
 							</Typography>
-							{alertBoolean !== "any" ? (
+							{response !== 0 && (
 								<Alert
 									variant="filled"
-									severity={alertBoolean === "false" ? "error" : "success"}
-									sx={{ width: "100%" }}
-									hidden={true}
+									severity={response === 200 ? "success" : "error"}
+									sx={{ width: "100%", color: "white" }}
+									hidden
 								>
-									{alertBoolean === "false"
-										? "Algo de errado aconteceu... :("
-										: "Logado com sucesso! Nos vemos mais tarde... ;)"}
+									{responseMessage}
 								</Alert>
-							) : (
-								<p hidden>Not found component</p>
 							)}
 							<Box
 								component="form"
