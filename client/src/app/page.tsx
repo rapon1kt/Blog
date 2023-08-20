@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+import { useEffect, useState } from "react";
 import { Check, NewspaperIcon } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -19,6 +19,7 @@ import {
 	Button,
 	useTheme,
 } from "@mui/material";
+import { Post } from "@/models";
 
 export default function Main() {
 	const mobile = useMediaQuery("(max-width:500px)");
@@ -26,6 +27,30 @@ export default function Main() {
 	const token = useSelector((state: any) => state.token);
 	const router = useRouter();
 	const theme = useTheme();
+
+	const [latestPosts, setLatestPosts] = useState<Post[]>([]);
+
+	useEffect(() => {
+		const getLatestPosts = async () => {
+			const response = await fetch("http://localhost:2007/posts", {
+				method: "get",
+				headers: {
+					"Content-type": "application/json",
+					Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
+				},
+			});
+
+			const posts = await response.json();
+			const latestPosts = [
+				posts[posts.length - 1],
+				posts[posts.length - 2],
+				posts[posts.length - 3],
+			];
+			setLatestPosts(latestPosts);
+		};
+
+		getLatestPosts();
+	}, []);
 
 	const alternative = theme.palette.mode === "light" ? "#407BFF" : "#F56565";
 
@@ -173,9 +198,11 @@ export default function Main() {
 					</Typography>{" "}
 					e junte-se à nós!
 				</Typography>
-				<Suspense fallback={<MainPostsSkeleton />}>
-					<MainPosts token={token} router={router} />
-				</Suspense>
+				{latestPosts.length > 3 ? (
+					<MainPosts token={token} router={router} latestPosts={latestPosts} />
+				) : (
+					<MainPostsSkeleton />
+				)}
 			</Box>
 			<Footer />
 		</Box>
