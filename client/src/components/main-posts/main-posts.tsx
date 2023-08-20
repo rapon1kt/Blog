@@ -10,29 +10,15 @@ import {
 } from "@mui/material";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
-export default async function MainPosts({
+export default function MainPosts({
 	token,
 	router,
+	latestPosts,
 }: {
 	token: string;
 	router: AppRouterInstance;
+	latestPosts: Post[];
 }) {
-	const response = await fetch("http://localhost:2007/posts", {
-		method: "get",
-		headers: {
-			"Content-type": "application/json",
-			Authorization: `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`,
-		},
-	});
-
-	const posts = await response.json();
-
-	const latestPosts = [
-		posts[posts.length - 1],
-		posts[posts.length - 2],
-		posts[posts.length - 3],
-	];
-
 	return (
 		<Grid
 			container
