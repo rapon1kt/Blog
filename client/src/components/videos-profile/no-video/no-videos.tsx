@@ -33,7 +33,7 @@ export default function NoVideos({
 						</IconButton>
 					</Stack>
 				) : (
-					"Ops! Aparentemente este usuário não possui artigos..."
+					"Ops! Aparentemente este usuário não possui videos..."
 				)}
 			</Typography>
 			<img
