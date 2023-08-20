@@ -14,6 +14,7 @@ import {
 	Checkbox,
 	Button,
 	Alert,
+	useTheme,
 } from "@mui/material";
 import { Formik } from "formik";
 import { Newspaper } from "lucide-react";
@@ -37,6 +38,8 @@ export default function Login() {
 	const [responseMessage, setResponseMessage] = React.useState("");
 	const dispatch = useDispatch();
 	const router = useRouter();
+
+	const theme = useTheme();
 
 	const login = async (values: any) => {
 		const loggedInResponse = await fetch("http://localhost:2007/auth/login", {
@@ -98,7 +101,10 @@ export default function Login() {
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
-							backgroundImage: `url("/assets/primary-page.png")`,
+							backgroundImage:
+								theme.palette.mode === "dark"
+									? 'url("/assets/login-dark.png")'
+									: 'url("/assets/login-light.png")',
 							backgroundSize: "contain",
 							backgroundRepeat: {
 								md: "no-repeat",

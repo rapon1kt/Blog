@@ -14,6 +14,7 @@ import {
 	Checkbox,
 	Button,
 	Alert,
+	useTheme,
 } from "@mui/material";
 import { Formik } from "formik";
 import { Newspaper } from "lucide-react";
@@ -54,6 +55,7 @@ interface NewUserProps {
 export default function Register() {
 	const [alertBoolean, setAlertBoolean] = React.useState("any");
 	const router = useRouter();
+	const theme = useTheme();
 	const handleFormSubmit = async (newUser: NewUserProps) => {
 		const handlePost = await fetch("http://localhost:2007/auth/register", {
 			method: "POST",
@@ -89,8 +91,6 @@ export default function Register() {
 				handleBlur,
 				handleChange,
 				handleSubmit,
-				setFieldValue,
-				resetForm,
 			}) => (
 				<Grid container component="main">
 					<CssBaseline />
@@ -103,7 +103,10 @@ export default function Register() {
 							display: "flex",
 							alignItems: "center",
 							justifyContent: "center",
-							backgroundImage: `url("/assets/primary-page.png")`,
+							backgroundImage:
+								theme.palette.mode === "dark"
+									? 'url("/assets/register-dark.png")'
+									: 'url("/assets/register-light.png")',
 							backgroundSize: "contain",
 							backgroundRepeat: {
 								md: "no-repeat",
