@@ -86,12 +86,14 @@ export default function Main() {
 						gutterBottom
 					>
 						{!mobile && (
-							<NewspaperIcon
-								style={{ color: alternative, marginInline: "1rem" }}
-								size={80}
-							/>
+							<>
+								Empreender News
+								<NewspaperIcon
+									style={{ color: alternative, marginInline: "1rem" }}
+									size={80}
+								/>
+							</>
 						)}
-						Empreender News
 					</Typography>
 					<Typography
 						variant="h6"
