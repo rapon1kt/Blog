@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Raleway } from "next/font/google";
 import "./global.modules.css";
 import ThemeContextProvider from "@/styles/theme";
 import StateProvider from "@/state/provider/provider";
 
-const inter = Inter({ subsets: ["latin"] });
+const raleway = Raleway({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Empreender News",
@@ -20,8 +20,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>
+		<html lang="pt-br">
+			<body className={raleway.className}>
 				<StateProvider>
 					<ThemeContextProvider>{children}</ThemeContextProvider>
 				</StateProvider>
