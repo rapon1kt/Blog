@@ -75,11 +75,11 @@ export default function NavBar({
 						component="div"
 						sx={{
 							flexGrow: 1,
-							display: { xs: "none", sm: "block" },
+							display: { sm: "block" },
 							ml: "1rem",
 						}}
 					>
-						Colégio Empreender
+						Empreender News
 					</Typography>
 					<Box
 						sx={{
