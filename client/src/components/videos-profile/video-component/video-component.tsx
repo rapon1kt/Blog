@@ -100,17 +100,10 @@ export default function VideoComponent({ video }: { video: Video }) {
 					<CardActions>
 						<Button
 							sx={{ color: "white", bgcolor: "alternative" }}
-							size="small"
+							fullWidth
 							onClick={() => router.push(`/v1/feed/videos/${video._id}`)}
 						>
 							Acessar o video
-						</Button>
-						<Button
-							sx={{ color: "white", bgcolor: "alternative" }}
-							size="small"
-							onClick={() => router.push(`/v1/feed/articles/fake-article`)}
-						>
-							Ler um artigo sobre
 						</Button>
 					</CardActions>
 				</Stack>
