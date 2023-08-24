@@ -1,13 +1,6 @@
 "use client";
-import {
-	Typography,
-	Link,
-	SxProps,
-	Stack,
-	Container,
-	useTheme,
-} from "@mui/material";
-import { Heart, Instagram } from "lucide-react";
+import { Typography, Link, SxProps, Container, useTheme } from "@mui/material";
+import { Heart } from "lucide-react";
 
 export default function Copyright({ props }: { props?: SxProps }) {
 	const theme = useTheme();
@@ -27,35 +20,25 @@ export default function Copyright({ props }: { props?: SxProps }) {
 				...props,
 			}}
 		>
-			<Stack>
-				<Typography variant="subtitle1" color="text.secondary">
-					{"Copyright © "}
-					<Link
-						href="https://colegioempreender.com.br"
-						sx={{ textDecoration: "none", color: "alternative" }}
-					>
-						Colégio Empreender
-					</Link>{" "}
-					{new Date().getFullYear()}
-					{"."}
-				</Typography>
-			</Stack>
-			<Stack>
-				<Typography
-					variant="subtitle1"
-					color="text.primary"
-					sx={{ dislay: "flex", alinItems: "center", justifyContent: "center" }}
-					gutterBottom
+			<Typography
+				variant="subtitle1"
+				color="text.primary"
+				sx={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					gap: 1,
+				}}
+				gutterBottom
+			>
+				Made with <Heart color={alternative} size={18} /> by{" "}
+				<Link
+					href="https://instagram.com/raponi_13"
+					style={{ color: alternative, textDecoration: "none" }}
 				>
-					Made with <Heart color={alternative} size={18} /> by{" "}
-					<Link
-						href="https://instagram.com/raponi_13"
-						style={{ color: alternative, textDecoration: "none" }}
-					>
-						rapon1kt
-					</Link>
-				</Typography>
-			</Stack>
+					rapon1kt
+				</Link>
+			</Typography>
 		</Container>
 	);
 }
