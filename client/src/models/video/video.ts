@@ -6,6 +6,7 @@ export default interface Video {
 	description: string;
 	url: string;
 	thumbnail: string;
+	owner: string;
 	comments: Array<Comments>;
 	createdAt: Date;
 	updatedAt: Date;
