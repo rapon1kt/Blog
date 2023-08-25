@@ -72,9 +72,6 @@ function VideoPageContainer({
 			>
 				<Box
 					sx={{
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
 						textAlign: "start",
 						borderRadius: "12px",
 						width: "100%",
@@ -90,39 +87,54 @@ function VideoPageContainer({
 						style={{ backgroundColor: "black" }}
 					/>
 				</Box>
-				<Box sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: {
+							xs: "column",
+							lg: "row",
+						},
+						gap: "1rem",
+					}}
+				>
 					<Stack
 						sx={{
-							p: "1rem",
-							m: "1.5rem",
-							width: "60%",
+							p: "2.5rem",
+							width: {
+								lg: "60%",
+							},
 							display: "flex",
-							flexDirection: "row",
-							gap: "1rem",
+							flexDirection: "column",
 						}}
 					>
-						<Box>
-							<Typography variant="h4" color="text.primary">
-								{video?.title}
-							</Typography>
-							<Typography variant="body2" color="alternative" gutterBottom>
-								Publicado há {timeAgo}
-							</Typography>
-							<Typography color="text.primary" variant="h5">
-								Descrição:{" "}
-							</Typography>
-							<Typography color="text.secondary" variant="subtitle1">
-								{video?.description}
-							</Typography>
-						</Box>
+						<Typography variant="h5" color="text.primary">
+							{video?.title}
+						</Typography>
+						<Typography variant="body2" color="alternative" gutterBottom>
+							Publicado há {timeAgo}
+						</Typography>
+						<Typography color="text.primary" variant="h6">
+							Descrição:{" "}
+						</Typography>
+						<Typography color="text.secondary" variant="subtitle1">
+							{video?.description}
+						</Typography>
 					</Stack>
 					<Stack
 						sx={{
-							p: "1rem",
-							m: "1.5rem",
-							width: "60%",
+							p: "2.5rem",
+							width: {
+								xs: "100%",
+								lg: "60%",
+							},
 							display: "flex",
-							flexDirection: "row",
+							flexDirection: {
+								xs: "column",
+								sm: "row",
+							},
+							alignItems: {
+								xs: "center",
+							},
 							gap: "1rem",
 						}}
 					>
@@ -131,7 +143,16 @@ function VideoPageContainer({
 								<Avatar
 									src={`/assets/users/${owner?.avatar_url}`}
 									alt={owner?.name}
-									sx={{ width: 200, height: 200 }}
+									sx={{
+										width: {
+											sm: 200,
+											xs: 250,
+										},
+										height: {
+											sm: 200,
+											xs: 250,
+										},
+									}}
 								/>
 								<Stack>
 									<Typography variant="h6" color="text.primary">
@@ -146,15 +167,38 @@ function VideoPageContainer({
 										{owner?.name}? Entre em seu perfil e confira novos vídeos ou
 										compartilhe esse vídeo com seus colegas!
 									</Typography>
-									<Stack sx={{ gap: "1rem" }}>
+									<Stack
+										sx={{
+											gap: "1rem",
+											display: "flex",
+											flexDirection: {
+												xs: "column",
+												sm: "row",
+											},
+										}}
+									>
 										<Button
-											sx={{ color: "white", bgcolor: "alternative" }}
+											sx={{
+												color: "white",
+												bgcolor: "alternative",
+												width: {
+													xs: "100%",
+													sm: "50%",
+												},
+											}}
 											onClick={() => router.push(`/profile/${owner?._id}`)}
 										>
 											Ver perfil
 										</Button>
 										<Button
-											sx={{ color: "white", bgcolor: "#0a3d8f" }}
+											sx={{
+												color: "white",
+												bgcolor: "#0a3d8f",
+												width: {
+													xs: "100%",
+													sm: "50%",
+												},
+											}}
 											onClick={() => {
 												navigator.clipboard.writeText(window.location.href);
 											}}
