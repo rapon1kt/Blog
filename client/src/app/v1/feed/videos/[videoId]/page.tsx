@@ -61,7 +61,7 @@ function VideoPageContainer({
 		>
 			<Navbar isCover={false} user={user} token={token} />
 			<Box
-				my="4rem"
+				mt="4rem"
 				sx={{
 					display: "flex",
 					flexDirection: "column",
