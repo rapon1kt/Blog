@@ -1,10 +1,10 @@
 "use client";
-import { Footer, Navbar } from "@/components";
+import { Footer, Navbar, VideoComments } from "@/components";
 import { Authorization } from "@/middlewares";
 import { User, Video } from "@/models";
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import moment from "moment";
@@ -99,7 +99,10 @@ function VideoPageContainer({
 				>
 					<Stack
 						sx={{
-							p: "2.5rem",
+							p: {
+								sm: "2.5rem",
+								xs: "1rem",
+							},
 							width: {
 								lg: "60%",
 							},
@@ -214,15 +217,7 @@ function VideoPageContainer({
 					</Stack>
 				</Box>
 			</Box>
-			<Box
-				sx={{
-					width: "30vw",
-				}}
-			>
-				<Typography variant="h4" sx={{ height: "60vh" }}>
-					Comentários
-				</Typography>
-			</Box>
+			{video && <VideoComments token={token} user={user} video={video} />}
 			<Footer />
 		</Box>
 	);
