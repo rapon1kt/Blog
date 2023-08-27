@@ -11,3 +11,4 @@ export { default as createVideo } from "./videos/createVideo";
 export { default as getUserVideos } from "./videos/getUserVideos";
 export { default as getVideos } from "./videos/getVideos";
 export { default as getVideo } from "./videos/getVideo";
+export { default as newVideoComment } from "./videos/newVideoComment";
