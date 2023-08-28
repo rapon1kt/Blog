@@ -1,6 +1,5 @@
 "use client";
-import { Footer, Navbar } from "@/components";
-import ArticleComments from "@/components/article-comments/article-comments";
+import { Footer, Navbar, ArticleComments } from "@/components";
 import { Authorization } from "@/middlewares";
 import { Post, User } from "@/models";
 import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
