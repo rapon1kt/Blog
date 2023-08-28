@@ -13,7 +13,10 @@ export default async function newComment(req: Request, res: Response) {
 		post?.comments.push({ text, owner });
 		// save and send comment
 		const savedComment = await post?.save();
-		res.status(201).json(savedComment);
+		res.status(201).json({
+			savedComment,
+			message: "Comentário publicado com sucesso!",
+		});
 	} catch (err: any) {
 		// if have an server error return an message as error.message
 		res.status(500).json({
