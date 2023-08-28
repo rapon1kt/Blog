@@ -11,3 +11,4 @@ export { default as VideosProfile } from "./videos-profile/videos-profile";
 export { default as UserProfileSkeleton } from "./user-profile-skeleton/user-profile-skeleton";
 export { default as ArticlePagination } from "./pagination/article-pagination";
 export { default as VideoComments } from "./video-comments/video-comments";
+export { default as ArticleComments } from "./article-comments/article-comments";
