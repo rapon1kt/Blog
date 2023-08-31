@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema(
 		description: {
 			type: String,
 			required: true,
-			max: 1500,
+			max: 300,
 		},
 		comments: {
 			type: [commentsSchema],
