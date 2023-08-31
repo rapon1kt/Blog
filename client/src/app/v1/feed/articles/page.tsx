@@ -1,17 +1,10 @@
 "use client";
 import { Footer, Navbar, ArticleFeedComponent } from "@/components";
-import { Authorization } from "@/middlewares";
-import { Post, User } from "@/models";
-import {
-	Box,
-	Button,
-	Grid,
-	Stack,
-	Typography,
-	useMediaQuery,
-} from "@mui/material";
 import { Suspense, useEffect, useState } from "react";
+import { Authorization } from "@/middlewares";
 import { useSelector } from "react-redux";
+import { Post, User } from "@/models";
+import { Box } from "@mui/material";
 
 function ArticleFeedContainer({ token, user }: { token: string; user: User }) {
 	const [articles, setArticles] = useState<Post[]>();
