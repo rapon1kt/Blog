@@ -12,3 +12,4 @@ export { default as UserProfileSkeleton } from "./user-profile-skeleton/user-pro
 export { default as ArticlePagination } from "./pagination/article-pagination";
 export { default as VideoComments } from "./video-comments/video-comments";
 export { default as ArticleComments } from "./article-comments/article-comments";
+export { default as ArticleFeedComponent } from "./article-feed-component/article-feed-component";
