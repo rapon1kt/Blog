@@ -1,5 +1,5 @@
 import { Post } from "@/models";
-import { Avatar, Box,  Stack, Typography } from "@mui/material";
+import { Avatar, Box, Stack, Typography } from "@mui/material";
 
 export default function ArticleComponent({ post }: { post: Post }) {
 	return (
@@ -42,7 +42,12 @@ export default function ArticleComponent({ post }: { post: Post }) {
 							gap: 1,
 						}}
 					>
-						<Typography variant="h5" color="text.primary">
+						<Typography
+							component="a"
+							href={`/v1/feed/articles/${post._id}`}
+							variant="h5"
+							color="text.primary"
+						>
 							{post.title} -
 						</Typography>
 						<Typography variant="subtitle1" color="alternative">
