@@ -200,7 +200,7 @@ export default function Main() {
 					</Typography>{" "}
 					e junte-se à nós!
 				</Typography>
-				{latestPosts.length > 3 ? (
+				{latestPosts ? (
 					<MainPosts token={token} router={router} latestPosts={latestPosts} />
 				) : (
 					<MainPostsSkeleton />
