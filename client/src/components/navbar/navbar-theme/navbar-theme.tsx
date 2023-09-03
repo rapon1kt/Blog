@@ -1,6 +1,6 @@
 "use client";
 import { setMode } from "@/state/state";
-import { Button, SxProps, useTheme } from "@mui/material";
+import { IconButton, SxProps, useTheme } from "@mui/material";
 import { Moon, Sun } from "lucide-react";
 import { useDispatch } from "react-redux";
 
@@ -12,37 +12,31 @@ export default function NavbarTheme({ props }: { props?: SxProps }) {
 
 	if (theme.palette.mode === "light") {
 		return (
-			<Button
-				variant="contained"
+			<IconButton
 				sx={{
 					textTransform: "none",
 					color: "text.primary",
-					bgcolor: "background.paper",
 					marginInline: 1,
 					...props,
 				}}
 				onClick={() => dispatch(setMode())}
 			>
 				<Moon size={24} color={alternative} style={{ marginRight: 0.5 }} />
-				Dark
-			</Button>
+			</IconButton>
 		);
 	} else {
 		return (
-			<Button
-				variant="contained"
+			<IconButton
 				sx={{
 					textTransform: "none",
 					color: "text.primary",
-					bgcolor: "background.paper",
 					marginInline: 1,
 					...props,
 				}}
 				onClick={() => dispatch(setMode())}
 			>
 				<Sun size={24} color={alternative} style={{ marginRight: 0.5 }} />
-				Light
-			</Button>
+			</IconButton>
 		);
 	}
 }

@@ -1,14 +1,6 @@
 "use client";
 import { setLogout } from "@/state/state";
-import {
-	Box,
-	Button,
-	ListItem,
-	ListItemButton,
-	SxProps,
-	Typography,
-	useTheme,
-} from "@mui/material";
+import { IconButton, SxProps, useTheme } from "@mui/material";
 import { LogInIcon, LogOutIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
@@ -28,12 +20,10 @@ export default function NavbarAuth({
 
 	if (token) {
 		return (
-			<Button
-				variant="contained"
+			<IconButton
 				sx={{
 					textTransform: "none",
 					color: "text.primary",
-					bgcolor: "background.paper",
 					marginInline: 1,
 					...props,
 				}}
@@ -47,25 +37,21 @@ export default function NavbarAuth({
 					color={alternative}
 					style={{ marginRight: 0.5 }}
 				/>
-				Sair
-			</Button>
+			</IconButton>
 		);
 	} else {
 		return (
-			<Button
-				variant="contained"
+			<IconButton
 				sx={{
 					textTransform: "none",
 					color: "text.primary",
-					bgcolor: "background.paper",
 					marginInline: 1,
 					...props,
 				}}
 				onClick={() => router.push("/login")}
 			>
 				<LogInIcon size={24} color={alternative} style={{ marginRight: 0.5 }} />
-				Entrar
-			</Button>
+			</IconButton>
 		);
 	}
 }

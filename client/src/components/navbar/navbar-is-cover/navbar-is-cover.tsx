@@ -1,4 +1,4 @@
-import { Box, Button, SxProps, useTheme } from "@mui/material";
+import { Box, IconButton, SxProps, useTheme } from "@mui/material";
 import { useRouter } from "next/navigation";
 import NavbarTheme from "../navbar-theme/navbar-theme";
 import {
@@ -15,19 +15,16 @@ import { User } from "@/models";
 const coverLinks = [
 	{
 		id: 1,
-		name: "Home",
 		link: "/home",
 		icon: HomeIcon,
 	},
 	{
 		id: 2,
-		name: "Sobre",
 		link: "#about",
 		icon: UsersIcon,
 	},
 	{
 		id: 3,
-		name: "Contato",
 		link: "#contact",
 		icon: PhoneIcon,
 	},
@@ -58,13 +55,11 @@ export default function NavbarIsCover({
 		return (
 			<Box sx={props?.box}>
 				{coverLinks.map((item: any) => (
-					<Button
+					<IconButton
 						key={item.id}
-						variant="contained"
 						sx={{
 							textTransform: "none",
 							color: "text.primary",
-							bgcolor: "background.paper",
 							marginInline: 1,
 							...props?.button,
 						}}
@@ -75,8 +70,7 @@ export default function NavbarIsCover({
 							color={alternative}
 							style={{ marginRight: 0.5 }}
 						/>
-						{item.name}
-					</Button>
+					</IconButton>
 				))}
 				<NavbarTheme props={props?.button} />
 				<NavbarAuth token={token!} props={props?.button} />
@@ -86,27 +80,22 @@ export default function NavbarIsCover({
 		return (
 			<Box sx={props?.box}>
 				{params?.userId ? (
-					<Button
-						variant="contained"
+					<IconButton
 						sx={{
 							textTransform: "none",
 							color: "text.primary",
-							bgcolor: "background.paper",
 							marginInline: 1,
 							...props?.button,
 						}}
 						onClick={() => router.push(`/home`)}
 					>
 						<Home size={24} color={alternative} style={{ marginRight: 0.5 }} />
-						Home
-					</Button>
+					</IconButton>
 				) : (
-					<Button
-						variant="contained"
+					<IconButton
 						sx={{
 							textTransform: "none",
 							color: "text.primary",
-							bgcolor: "background.paper",
 							marginInline: 1,
 							...props?.button,
 						}}
@@ -117,15 +106,12 @@ export default function NavbarIsCover({
 							color={alternative}
 							style={{ marginRight: 0.5 }}
 						/>
-						Meu Perfil
-					</Button>
+					</IconButton>
 				)}
-				<Button
-					variant="contained"
+				<IconButton
 					sx={{
 						textTransform: "none",
 						color: "text.primary",
-						bgcolor: "background.paper",
 						marginInline: 1,
 						...props?.button,
 					}}
@@ -136,8 +122,7 @@ export default function NavbarIsCover({
 						color={alternative}
 						style={{ marginRight: 0.5 }}
 					/>
-					Configurações
-				</Button>
+				</IconButton>
 				<NavbarTheme props={props?.button} />
 				<NavbarAuth token={token!} props={props?.button} />
 			</Box>

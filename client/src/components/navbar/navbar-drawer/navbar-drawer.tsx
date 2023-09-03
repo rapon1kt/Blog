@@ -28,19 +28,16 @@ import { setLogout } from "@/state/state";
 const navLinks = [
 	{
 		id: 1,
-		name: "Home",
 		link: "/home",
 		icon: HomeIcon,
 	},
 	{
 		id: 2,
-		name: "Sobre",
 		link: "#about",
 		icon: UsersIcon,
 	},
 	{
 		id: 3,
-		name: "Contato",
 		link: "#contact",
 		icon: PhoneIcon,
 	},
@@ -101,7 +98,6 @@ export default function NavbarDrawer({ token }: { token: string }) {
 					<Box
 						key={item.id}
 						sx={{
-							width: "100%",
 							display: "flex",
 							flexDirection: "column",
 							justifyContent: "center",
@@ -113,24 +109,12 @@ export default function NavbarDrawer({ token }: { token: string }) {
 								sx={{ textAlign: "center", color: "alternative" }}
 							>
 								<item.icon style={{ marginInline: 6 }} />
-								<Typography
-									variant="h6"
-									align="right"
-									sx={{
-										color: "text.secondary",
-										textDecoration: "none",
-										width: "100%",
-									}}
-								>
-									{item.name}
-								</Typography>
 							</ListItemButton>
 						</ListItem>
 					</Box>
 				))}
 				<Box
 					sx={{
-						width: "100%",
 						display: "flex",
 						flexDirection: "column",
 						justifyContent: "center",
@@ -144,17 +128,6 @@ export default function NavbarDrawer({ token }: { token: string }) {
 							) : (
 								<Sun style={{ marginInline: 6 }} />
 							)}
-							<Typography
-								variant="h6"
-								align="right"
-								sx={{
-									color: "text.secondary",
-									textDecoration: "none",
-									width: "100%",
-								}}
-							>
-								Tema
-							</Typography>
 						</ListItemButton>
 					</ListItem>
 					{token ? (
@@ -163,34 +136,12 @@ export default function NavbarDrawer({ token }: { token: string }) {
 								sx={{ textAlign: "center", color: "alternative" }}
 							>
 								<LogOut style={{ marginInline: 6, color: alternative }} />
-								<Typography
-									variant="h6"
-									align="right"
-									sx={{
-										color: "text.secondary",
-										textDecoration: "none",
-										width: "100%",
-									}}
-								>
-									Sair
-								</Typography>
 							</ListItemButton>
 						</ListItem>
 					) : (
 						<ListItem key={5} onClick={() => router.push("/login")}>
 							<ListItemButton sx={{ textAlign: "center" }}>
 								<LogInIcon style={{ marginInline: 6, color: alternative }} />
-								<Typography
-									variant="h6"
-									align="right"
-									sx={{
-										color: "text.secondary",
-										textDecoration: "none",
-										width: "100%",
-									}}
-								>
-									Entrar
-								</Typography>
 							</ListItemButton>
 						</ListItem>
 					)}

@@ -1,5 +1,5 @@
 "use client";
-import { Button, Menu, useTheme, Box } from "@mui/material";
+import { Menu, useTheme, Box, IconButton } from "@mui/material";
 import { LayoutDashboard } from "lucide-react";
 import React from "react";
 import NavbarIsCover from "../navbar-is-cover/navbar-is-cover";
@@ -33,7 +33,7 @@ export default function NavbarMenu({
 
 	return (
 		<Box sx={{ display: { xs: "block", md: "none" } }}>
-			<Button
+			<IconButton
 				id="basic-button"
 				aria-controls={open ? "basic-menu" : undefined}
 				aria-haspopup="true"
@@ -41,7 +41,7 @@ export default function NavbarMenu({
 				onClick={handleClick}
 			>
 				<LayoutDashboard color={alternative} />
-			</Button>
+			</IconButton>
 			<Menu
 				id="basic-menu"
 				anchorEl={anchorEl}
