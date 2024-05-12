@@ -1,16 +1,2 @@
-export { default as Copyright } from "./copyright/copyright";
 export { default as getUser } from "./get-user/get-user";
 export { default as Navbar } from "./navbar/navbar";
-export { default as Footer } from "./footer/footer";
-export { default as MainPosts } from "./main-posts/main-posts";
-export { default as MainPostsSkeleton } from "./main-posts-skeleton/main-posts-skeleton";
-export { default as Features } from "./features/features";
-export { default as UserProfile } from "./user-profile/user-profile";
-export { default as ArticlesProfile } from "./articles-profile/articles-profile";
-export { default as VideosProfile } from "./videos-profile/videos-profile";
-export { default as UserProfileSkeleton } from "./user-profile-skeleton/user-profile-skeleton";
-export { default as ArticlePagination } from "./pagination/article-pagination";
-export { default as VideoComments } from "./video-comments/video-comments";
-export { default as ArticleComments } from "./article-comments/article-comments";
-export { default as ArticleFeedComponent } from "./article-feed-component/article-feed-component";
-export { default as VideoFeedComponent } from "./video-feed-component/video-feed-component";
