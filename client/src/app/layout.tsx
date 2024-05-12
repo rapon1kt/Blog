@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "./global.modules.css";
-import ThemeContextProvider from "@/styles/theme";
-import StateProvider from "@/state/provider/provider";
 
 export const metadata: Metadata = {
-	title: "Empreender News",
+	title: "Blog",
 	description: "Created by rapon1kt",
 };
 
@@ -15,11 +13,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="pt-br">
-			<body>
-				<StateProvider>
-					<ThemeContextProvider>{children}</ThemeContextProvider>
-				</StateProvider>
-			</body>
+			<body>{children}</body>
 		</html>
 	);
 }
