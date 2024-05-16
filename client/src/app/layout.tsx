@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./global.modules.css";
-import { ThemeProvider } from "@/providers";
+import { AuthProvider, ThemeProvider } from "@/providers";
 
 export const metadata: Metadata = {
 	title: "Blog",
@@ -14,9 +14,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="pt-br">
-			<ThemeProvider>
-				<body>{children}</body>
-			</ThemeProvider>
+			<AuthProvider>
+				<ThemeProvider>
+					<body>{children}</body>
+				</ThemeProvider>
+			</AuthProvider>
 		</html>
 	);
 }
